@@ -6,7 +6,7 @@ a custom node for [ACE](https://github.com/ali-vilab/ACE),mixin `['Facial Editin
             'General Editing','Remove Text','Remove Object','Add Object','Style Transfer',
             'Try On','Workflow']` 22 tasks in one [workflow](./doc/image_mask.json)
 ## 教程
-- [镜像链接的配套教程]()
+- [镜像链接的配套教程](https://www.bilibili.com/video/BV1KDDQYtEJS/)
 - [镜像链接](https://www.xiangongyun.com/image/detail/bc5525b9-511a-4a1a-8009-c196126059cc)，推荐使用因为flash-attention编译很慢，不信你就试试
     - 新用户注册填写邀请码：[XLVYLW](https://www.xiangongyun.com/register/XLVYLW),送体验金
 ## Example
