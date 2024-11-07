@@ -46,20 +46,20 @@ class ACE_IMG_Node:
         img_np = edit_img.numpy()[0] * 255
         img_np = img_np.astype(np.uint8)
         img_pil = Image.fromarray(img_np)
-        if edit_mask:
-            mask = edit_mask.numpy()[0]
-            mask_3 = np.stack([mask,mask,mask],-1).astype(np.uint8) * 255
-            mask_3 = Image.fromarray(mask_3)
 
+        if edit_mask is not None:
+            mask = edit_mask.numpy()[0]
+            mask_3 = np.stack([mask,mask,mask],-1).astype(np.uint8)*255
+            mask_3 = Image.fromarray(mask_3).convert('L')
         return ({
             "edit_img":img_pil,
-            "edit_mask": mask_3 if edit_mask else None
+            "edit_mask": mask_3 if edit_mask is not None else None
         },)
 
 class ACE_Node:
     def __init__(self) -> None:
         self.pipe = None
-        if not osp.exists(osp.join(ace_model_dir,"text_encoder/t5-v1_1-xxl/pytorch_model-00005-of-00005.bin")):
+        if not osp.exists(osp.join(ace_model_dir,"models","text_encoder/t5-v1_1-xxl/pytorch_model-00005-of-00005.bin")):
             snapshot_download(repo_id="scepter-studio/ACE-0.6B-512px",
                               allow_patterns=["models/*"],
                               local_dir=ace_model_dir)
@@ -83,6 +83,9 @@ class ACE_Node:
                 }),
                 "store_in_varm":("BOOLEAN",{
                     "default": False
+                }),
+                "seed":("INT",{
+                    "default":42
                 })
                 
             },
@@ -103,9 +106,9 @@ class ACE_Node:
     CATEGORY = "AIFSH_ACE"
 
     def gen_img(self,prompt_text,latent,ace_task,sample_steps,guide_scale,
-                guide_rescale,store_in_varm,image_mask=None,
+                guide_rescale,store_in_varm,seed,image_mask=None,
                 image_mask1=None,image_mask2=None):
-
+        torch.manual_seed(seed)
         if self.pipe is None:
             model_cfg = Config(load=True,
                             cfg_file=cfg_file)
@@ -141,8 +144,8 @@ class ACE_Node:
                   prompt=prompt_text,task=ace_task,negative_prompt="",
                   output_height=height,output_width=width,sample_steps=sample_steps,
                   guide_rescale=guide_rescale,guide_scale=guide_scale)
-        
-        res_imgs = torch.stack(imgs,-1)
+    
+        res_imgs = torch.from_numpy(np.stack(imgs))
         print(res_imgs.shape)
         if not store_in_varm:
             self.pipe = None

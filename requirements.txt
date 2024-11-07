@@ -11,7 +11,7 @@ opencv_transforms>=0.0.6
 oss2>=2.15.0
 einops
 ninja
-# flash-attn==2.5.8 --use-pep517 --no-build-isolation --verbose
+flash-attn==2.5.8 --use-pep517 --no-build-isolation --verbose
 bitsandbytes
 diffusers
 addict
