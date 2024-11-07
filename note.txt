@@ -1,0 +1,1 @@
+MAX_JOBS=2 pip install flash-attn==2.5.8 --use-pep517 --no-build-isolation --verbose
