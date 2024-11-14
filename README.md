@@ -9,6 +9,10 @@ a custom node for [ACE](https://github.com/ali-vilab/ACE),mixin `['Facial Editin
 - [镜像链接的配套教程](https://www.bilibili.com/video/BV1KDDQYtEJS/)
 - [镜像链接](https://www.xiangongyun.com/image/detail/bc5525b9-511a-4a1a-8009-c196126059cc)，推荐使用因为flash-attention编译很慢，不信你就试试
     - 新用户注册填写邀请码：[XLVYLW](https://www.xiangongyun.com/register/XLVYLW),送体验金
+
+## Disclaimer / 免责声明
+We do not hold any responsibility for any illegal usage of the codebase. Please refer to your local laws about DMCA and other related laws. 我们不对代码库的任何非法使用承担任何责任. 请参阅您当地关于 DMCA (数字千年法案) 和其他相关法律法规.
+
 ## Example
 `in prompt_text,image auto be {iamge}`
 |prompt_text|image_mask|image_mask1|image_mask2|output|
